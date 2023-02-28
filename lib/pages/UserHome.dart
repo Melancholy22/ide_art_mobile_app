@@ -13,7 +13,10 @@ class UserHome extends StatelessWidget {
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             'ideArt',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color: Colors.white,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.bold),
           ),
           Row(
             children: [Icon(Icons.density_medium)],

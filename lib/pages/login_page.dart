@@ -1,3 +1,5 @@
+// ignore_for_file: sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/components/my_button.dart';
 import 'package:ide_art_mobile_app/components/my_textfield.dart';
@@ -21,25 +23,53 @@ class LoginPage extends StatelessWidget {
         child: Center(
           child: Column(
             children: [
-
-              const SizedBox(height: 50,),
+              const SizedBox(height: 120,),
 
               // Logo
-              const Icon(
-                Icons.lock,
-                size: 100
+              // const Icon(
+              //   Icons.lock,
+              //   size: 100
+              // ),
+              
+              Stack(
+                children: [
+                  // Container(
+                  //   child: Image(image: AssetImage('assets/images/Rectangle.png')),
+                  //   alignment: Alignment.topCenter,
+                  //   height: 150,
+                  //   width: 400,
+                  // ),
+                  Container(
+                    // child: Image(image: AssetImage('assets/images/ideArt.png')),
+                    // ignore: prefer_const_constructors
+                    child: Text(
+                      'ideArt',
+                      // ignore: prefer_const_constructors
+                      style: TextStyle(
+                        color: Colors.black, 
+                        fontSize: 40, 
+                        fontFamily: 'Outfit', 
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                    padding: const EdgeInsets.all(50),
+                    alignment: Alignment.bottomCenter,
+                  ),
+                  
+                ]
               ),
-              const SizedBox(height: 50,),
+
+              const SizedBox(height: 25,),
 
               // Welcome back
-              Text(
-                'Welcome back!',
-                style: TextStyle(
-                  color: Colors.grey[700],
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 25,),
+              // Text(
+              //   'Welcome back!',
+              //   style: TextStyle(
+              //     color: Colors.grey[700],
+              //     fontSize: 16,
+              //   ),
+              // ),
+              // const SizedBox(height: 25,),
               
               // Username
               MyTextField(
@@ -78,52 +108,52 @@ class LoginPage extends StatelessWidget {
                 onTap: signUserIn,
               ),
 
-              const SizedBox(height: 50),
-              // or continue with
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: Text(
-                        'Or continue with',
-                        style: TextStyle(color: Colors.grey[700]),
-                      ),
-                    ),
-                    Expanded(
-                      child: Divider(
-                        thickness: 0.5,
-                        color: Colors.grey[400],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const SizedBox(height: 5),
+              // // or continue with
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child: Divider(
+              //           thickness: 0.5,
+              //           color: Colors.grey[400],
+              //         ),
+              //       ),
+              //       Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              //         child: Text(
+              //           'Or continue with',
+              //           style: TextStyle(color: Colors.grey[700]),
+              //         ),
+              //       ),
+              //       Expanded(
+              //         child: Divider(
+              //           thickness: 0.5,
+              //           color: Colors.grey[400],
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
-              const SizedBox(height: 50),
+              // const SizedBox(height: 50),
               
-              // Sign in options
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  // google button
-                  SquareTile(imagePath: 'assets/images/google.png'),
+              // // Sign in options
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: const [
+              //     // google button
+              //     SquareTile(imagePath: 'assets/images/google.png'),
 
-                  SizedBox(width: 25),
+              //     SizedBox(width: 25),
 
-                  // apple button
-                  SquareTile(imagePath: 'assets/images/apple.png')
-                ],
-              ),
+              //     // apple button
+              //     SquareTile(imagePath: 'assets/images/apple.png')
+              //   ],
+              // ),
 
-              const SizedBox(height: 50),
+              // const SizedBox(height: 50),
               
               // Register Now
               Row(

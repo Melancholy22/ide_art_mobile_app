@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ide_art_mobile_app/pages/landing_page.dart';
 import 'pages/home_page.dart';
 import 'pages/login_page.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: LoginPage(),
+        home: LandingPage(),
         //home: HomePage(),
         theme: ThemeData(primarySwatch: Colors.blue)); //MaterialApp
   }

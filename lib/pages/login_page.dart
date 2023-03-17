@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 import 'package:ide_art_mobile_app/components/my_button.dart';
 import 'package:ide_art_mobile_app/components/my_textfield.dart';
 import 'package:ide_art_mobile_app/components/square_tile.dart';
@@ -25,41 +26,54 @@ class LoginPage extends StatelessWidget {
             children: [
               const SizedBox(height: 120,),
 
-              // Logo
-              // const Icon(
-              //   Icons.lock,
-              //   size: 100
-              // ),
-              
-              Stack(
+              //Logo
+              Row(
                 children: [
-                  // Container(
-                  //   child: Image(image: AssetImage('assets/images/Rectangle.png')),
-                  //   alignment: Alignment.topCenter,
-                  //   height: 150,
-                  //   width: 400,
-                  // ),
+                  const SizedBox(width: 65,),
                   Container(
-                    // child: Image(image: AssetImage('assets/images/ideArt.png')),
-                    // ignore: prefer_const_constructors
-                    child: Text(
-                      'ideArt',
-                      // ignore: prefer_const_constructors
-                      style: TextStyle(
-                        color: Colors.black, 
-                        fontSize: 40, 
-                        fontFamily: 'Outfit', 
-                        fontWeight: FontWeight.bold
-                      ),
-                    ),
-                    padding: const EdgeInsets.all(50),
-                    alignment: Alignment.bottomCenter,
+                    child: Image(image: AssetImage('assets/images/LogoTitle2.png',),),
+                    height: 121
                   ),
-                  
-                ]
+                ],
               ),
+              
+              // Stack(
+              //   children: [
+              //     // Container(
+              //     //   child: Image(image: AssetImage('assets/images/Rectangle.png')),
+              //     //   alignment: Alignment.topCenter,
+              //     //   height: 150,
+              //     //   width: 400,
+              //     // ),
+              //     Container(
+              //       // child: Image(image: AssetImage('assets/images/ideArt.png')),
+              //       // ignore: prefer_const_constructors
+              //     //   child: Row(
+              //     //     children: [
+              //     //       Container(
+              //     //         child: Image(image: AssetImage('assets/images/Logo1.png',),),
+              //     //         height: 115
+              //     //       ),
+              //     //       Text(
+              //     //         'ideArt',
+              //     //         // ignore: prefer_const_constructors
+              //     //         style: TextStyle(
+              //     //           color: Colors.black, 
+              //     //           fontSize: 40, 
+              //     //           fontFamily: 'Outfit', 
+              //     //           fontWeight: FontWeight.bold
+              //     //         ),
+              //     //       ),
+              //     //     ],
+              //     //   ),
+              //     //   padding: const EdgeInsets.all(50),
+              //     //   alignment: Alignment.bottomCenter,
+              //     // ),
+                  
+              //   ]
+              // ),
 
-              const SizedBox(height: 25,),
+              const SizedBox(height: 60,),
 
               // Welcome back
               // Text(
@@ -164,13 +178,28 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(color: Colors.grey[700]),
                   ),
                   const SizedBox(width: 4),
-                  const Text(
-                    'Register now',
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontWeight: FontWeight.bold,
+                  
+                  RichText(
+                    text: TextSpan(
+                      text: 'Register here',
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          debugPrint('The Register button is clicked!');
+                        },
+                      style: const TextStyle(
+                        color: Colors.blue,
+                        fontWeight: FontWeight.bold,
+                      )
                     ),
                   ),
+
+                  // const Text(
+                  //   'Register now',
+                  //   style: TextStyle(
+                  //     color: Colors.blue,
+                  //     fontWeight: FontWeight.bold,
+                  //   ),
+                  // ),
                 ],
               )
           ]),

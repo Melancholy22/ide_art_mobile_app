@@ -1,8 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+// Landing page //
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/components/get_started.dart';
 import 'package:ide_art_mobile_app/pages/login_page.dart';
@@ -11,12 +7,14 @@ import 'package:ide_art_mobile_app/pages/login_page.dart';
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
 
-  void onPressed () {
-    LoginPage();
+  void onPressed (BuildContext context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
   }
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints.expand(),
@@ -30,7 +28,7 @@ class LandingPage extends StatelessWidget {
           child: Center(
             child: Column(
               children: [
-                const SizedBox(height: 320),
+                SizedBox(height: screenHeight / 3),
 
                 Image.asset('assets/images/bulb.png'),
 
@@ -44,11 +42,17 @@ class LandingPage extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: 200),
-
-                MyButton2(
-                  onTap: onPressed,
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: MyButton2(
+                      onTap: (){
+                        onPressed(context);
+                      },
+                    ),
+                  ),
                 ),
+                const SizedBox(height: 30,)
               ],
             ),
           ),

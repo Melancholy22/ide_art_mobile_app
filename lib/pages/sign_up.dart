@@ -7,6 +7,9 @@ class SignUp extends StatelessWidget {
   SignUp({super.key});
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final emailController = TextEditingController();
+  final nameController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +51,7 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextField(
                   // ignore: unnecessary_new
+                  controller: usernameController,
                   style: TextStyle(
                       color: Colors.grey[600],
                       fontFamily: 'Poppins',
@@ -74,6 +78,7 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextField(
                   // ignore: unnecessary_new
+                  controller: emailController,
                   style: TextStyle(
                       color: Colors.grey[600],
                       fontFamily: 'Poppins',
@@ -99,6 +104,7 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextField(
                   // ignore: unnecessary_new
+                  controller: passwordController,
                   style: TextStyle(
                       color: Colors.grey[600],
                       fontFamily: 'Poppins',
@@ -149,6 +155,7 @@ class SignUp extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: TextField(
                   // ignore: unnecessary_new
+                  controller: nameController,
                   style: TextStyle(
                       color: Colors.grey[600],
                       fontFamily: 'Poppins',

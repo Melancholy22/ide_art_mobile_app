@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3reactartwebsiteimagestorage",
+  "bucketName": "react-art-website-image-storage",
+  "policyUUID": "60269dc8",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ]
+}

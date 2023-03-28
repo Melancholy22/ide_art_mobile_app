@@ -1,7 +1,7 @@
 // Landing page //
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/components/get_started.dart';
-import 'package:ide_art_mobile_app/pages/login_page.dart';
+import 'package:ide_art_mobile_app/features/pages/login_page.dart';
 
 
 class LandingPage extends StatelessWidget {

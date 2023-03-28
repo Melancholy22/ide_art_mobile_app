@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:ide_art_mobile_app/pages/UserCreate.dart';
-import 'package:ide_art_mobile_app/pages/UserHome.dart';
-import 'package:ide_art_mobile_app/pages/UserNotifis.dart';
-import 'package:ide_art_mobile_app/pages/UserProfile.dart';
-import 'package:ide_art_mobile_app/pages/UserSearch.dart';
+import 'package:ide_art_mobile_app/features/pages/UserCreate.dart';
+import 'package:ide_art_mobile_app/features/pages/UserHome.dart';
+import 'package:ide_art_mobile_app/features/pages/UserNotifis.dart';
+import 'package:ide_art_mobile_app/features/pages/UserProfile.dart';
+import 'package:ide_art_mobile_app/features/pages/UserSearch.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

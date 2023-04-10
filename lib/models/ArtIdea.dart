@@ -133,6 +133,10 @@ class ArtIdea extends Model {
   Map<String, dynamic> toJson() => {
     'id': id, 'idea': _idea, 'filter': enumToString(_filter), 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
+  
+  Map<String, Object?> toMap() => {
+    'id': id, 'idea': _idea, 'filter': _filter, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+  };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField IDEA = QueryField(fieldName: "idea");
@@ -188,5 +192,10 @@ class _ArtIdeaModelType extends ModelType<ArtIdea> {
   @override
   ArtIdea fromJson(Map<String, dynamic> jsonData) {
     return ArtIdea.fromJson(jsonData);
+  }
+  
+  @override
+  String modelName() {
+    return 'ArtIdea';
   }
 }

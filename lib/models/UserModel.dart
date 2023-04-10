@@ -124,6 +124,10 @@ class UserModel extends Model {
   Map<String, dynamic> toJson() => {
     'id': id, 'name': _name, 'biography': _biography, 'profilepic': _profilepic, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
+  
+  Map<String, Object?> toMap() => {
+    'id': id, 'name': _name, 'biography': _biography, 'profilepic': _profilepic, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+  };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField NAME = QueryField(fieldName: "name");
@@ -186,5 +190,10 @@ class _UserModelModelType extends ModelType<UserModel> {
   @override
   UserModel fromJson(Map<String, dynamic> jsonData) {
     return UserModel.fromJson(jsonData);
+  }
+  
+  @override
+  String modelName() {
+    return 'UserModel';
   }
 }

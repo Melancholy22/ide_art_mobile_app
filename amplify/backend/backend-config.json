@@ -1,72 +1,90 @@
 {
+  "api": {
+    "reactartwebsite": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            },
+            "authenticationType": "API_KEY"
+          }
+        }
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync"
+    }
+  },
   "auth": {
     "reactartwebsite": {
-      "service": "Cognito",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": [],
       "customAuth": false,
+      "dependsOn": [],
       "frontendAuthConfig": {
-        "socialProviders": [],
-        "usernameAttributes": [],
-        "signupAttributes": [
-          "EMAIL",
-          "PREFERRED_USERNAME"
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": [
             "REQUIRES_LOWERCASE",
             "REQUIRES_NUMBERS",
             "REQUIRES_SYMBOLS",
             "REQUIRES_UPPERCASE"
-          ]
+          ],
+          "passwordPolicyMinLength": 8
         },
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
+        "signupAttributes": [
+          "EMAIL",
+          "PREFERRED_USERNAME"
         ],
+        "socialProviders": [],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
-      }
-    }
-  },
-  "api": {
-    "reactartwebsite": {
-      "service": "AppSync",
+      },
       "providerPlugin": "awscloudformation",
-      "dependsOn": [],
-      "output": {
-        "authConfig": {
-          "defaultAuthentication": {
-            "authenticationType": "API_KEY",
-            "apiKeyConfig": {
-              "apiKeyExpirationDays": 30,
-              "description": "api key description"
-            }
-          },
-          "additionalAuthenticationProviders": [
-            {
-              "authenticationType": "AWS_IAM"
-            }
-          ]
-        }
-      }
-    }
-  },
-  "storage": {
-    "s3reactartwebsiteimagestorage": {
-      "service": "S3",
-      "providerPlugin": "awscloudformation",
-      "dependsOn": []
+      "service": "Cognito"
     }
   },
   "function": {
     "adduser": {
       "build": true,
+      "dependsOn": [],
       "providerPlugin": "awscloudformation",
-      "service": "Lambda",
-      "dependsOn": []
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_adduser_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adduser"
+        }
+      ]
+    },
+    "AMPLIFY_function_adduser_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "adduser"
+        }
+      ]
+    }
+  },
+  "storage": {
+    "s3reactartwebsiteimagestorage": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
     }
   }
 }

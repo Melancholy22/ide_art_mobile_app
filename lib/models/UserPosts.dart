@@ -134,6 +134,10 @@ class UserPosts extends Model {
   Map<String, dynamic> toJson() => {
     'id': id, 'author': _author, 'title': _title, 'description': _description, 'image': _image, 'createdAt': _createdAt?.format(), 'updatedAt': _updatedAt?.format()
   };
+  
+  Map<String, Object?> toMap() => {
+    'id': id, 'author': _author, 'title': _title, 'description': _description, 'image': _image, 'createdAt': _createdAt, 'updatedAt': _updatedAt
+  };
 
   static final QueryField ID = QueryField(fieldName: "id");
   static final QueryField AUTHOR = QueryField(fieldName: "author");
@@ -203,5 +207,10 @@ class _UserPostsModelType extends ModelType<UserPosts> {
   @override
   UserPosts fromJson(Map<String, dynamic> jsonData) {
     return UserPosts.fromJson(jsonData);
+  }
+  
+  @override
+  String modelName() {
+    return 'UserPosts';
   }
 }

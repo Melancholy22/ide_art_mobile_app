@@ -1,3 +1,4 @@
+import 'package:amplify_api/model_mutations.dart';
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/components/get_started.dart';
 import 'package:ide_art_mobile_app/components/my_button.dart';
@@ -10,7 +11,10 @@ import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_picker/image_picker.dart';
+import '../../models/ModelProvider.dart';
 import 'dart:io';
+
+import '../../models/UserPosts.dart';
 
 
 class UserCreate extends StatefulWidget {
@@ -24,6 +28,8 @@ class _UserCreateState extends State<UserCreate> {
 
   final ImagePicker picker = ImagePicker();
 
+  var url;
+
   //we can upload image from camera or from gallery based on parameter
   Future getImage(ImageSource media) async {
     var img = await picker.pickImage(source: media);
@@ -35,7 +41,7 @@ class _UserCreateState extends State<UserCreate> {
 
   Future<void> uploadImage() async {
     // Select image from user's gallery
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final pickedFile = image;//await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile == null) {
       safePrint('No image selected');
@@ -43,7 +49,7 @@ class _UserCreateState extends State<UserCreate> {
     }
 
     // Upload image with the current time as the key
-    final key = DateTime.now().toString();
+    final key = pickedFile.name;//DateTime.now().toString();
     final file = File(pickedFile.path);
     try {
       final UploadFileResult result = await Amplify.Storage.uploadFile(
@@ -60,11 +66,19 @@ class _UserCreateState extends State<UserCreate> {
   }
 
   Future<void> getDownloadUrl() async {
+    final pickedFile = image;
+
+    if (pickedFile == null) {
+      safePrint('No image selected');
+      return;
+    }
+
     try {
-      final result = await Amplify.Storage.getUrl(key: 'ExampleKey');
+      final result = await Amplify.Storage.getUrl(key: pickedFile.name);
       // NOTE: This code is only for demonstration
       // Your debug console may truncate the printed url string
       safePrint('Got URL: ${result.url}');
+      url = result.url;
     } on StorageException catch (e) {
       safePrint('Error getting download URL: $e');
     }
@@ -118,13 +132,45 @@ class _UserCreateState extends State<UserCreate> {
 
   @override
   Widget build(BuildContext context) {
-    final authorController = TextEditingController();
     final titleController = TextEditingController();
     final descController = TextEditingController();
-    final imageController = TextEditingController();
+    var username;
+
+    Future<void> createUserPosts() async {
+      try {
+        final model = UserPosts(
+        author: username,
+        title: titleController.text,
+        description: descController.text,
+        image: url);
+        final request = ModelMutations.create(model);
+        final response = await Amplify.API.mutate(request: request).response;
+
+        final createdUserPosts = response.data;
+        if (createdUserPosts == null) {
+          safePrint('errors: ${response.errors}');
+          return;
+        }
+        safePrint('Mutation result: ${createdUserPosts.id}');
+      } on ApiException catch (e) {
+        safePrint('Mutation failed: $e');
+      }
+    }
+
+    Future<void> fetchCurrentUserAttributes() async {
+      try {
+        final result = await Amplify.Auth.fetchUserAttributes();
+        final data = {for (var e in result) e.userAttributeKey.key: e.value};
+        
+        username = data['preferred_username'];
+        safePrint(username);
+      } on AuthException catch (e) {
+        safePrint('Error fetching user attributes: ${e.message}');
+      }
+    }
 
     onTap() async {
-      uploadImage();
+      fetchCurrentUserAttributes().whenComplete(() => uploadImage().whenComplete(() => getDownloadUrl().whenComplete(() => createUserPosts())));
     }
 
     return Scaffold(

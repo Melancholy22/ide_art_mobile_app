@@ -12,14 +12,14 @@
       "AmplifyAppId": "d3npwq8prx9udw"
     },
     "categories": {
-      "auth": {
-        "reactartwebsite": {}
-      },
       "function": {
         "adduser": {
           "deploymentBucketName": "amplify-reactartwebsite-staging-231705-deployment",
           "s3Key": "amplify-builds/adduser-494333616850796f5547-build.zip"
         }
+      },
+      "auth": {
+        "reactartwebsite": {}
       },
       "storage": {
         "s3reactartwebsiteimagestorage": {}

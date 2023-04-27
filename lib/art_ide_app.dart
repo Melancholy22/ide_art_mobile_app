@@ -140,7 +140,7 @@ return Authenticator(
             ],
           );
         default:
-          // returning null defaults to the prebuilt authenticator for all other steps
+          // returning null defaults to the prebu ilt authenticator for all other steps
           return null;
       }
     },

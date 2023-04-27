@@ -1,5 +1,8 @@
+import 'package:amplify_api/model_queries.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:ide_art_mobile_app/models/ArtIdea.dart';
+import 'package:ide_art_mobile_app/models/UserPosts.dart';
 
 class UserHome extends StatelessWidget {
   const UserHome({super.key});
@@ -14,6 +17,7 @@ class UserHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: Color.fromRGBO(113, 203, 255, 100),
@@ -43,7 +47,14 @@ class UserHome extends StatelessWidget {
           )
         ]),
       ),
-      body: Center(child: Text('Home')),
+      body: Center(
+        child: ElevatedButton(
+          child: Text('Generate Idea'),
+          onPressed: () {
+            
+          },
+        ),
+      ),
     );
   }
 }

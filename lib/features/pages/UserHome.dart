@@ -30,57 +30,56 @@ class UserHome extends StatelessWidget {
     return Scaffold(
       appBar: topBar(),
 
-      body: Container(
-        child: ListView(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: GradientText(
-                'Explore Challenges',
-                style: TextStyle(
-                  fontSize: 24, 
-                  fontFamily: 'Poppins', 
-                  fontWeight: FontWeight.bold
-                  ),
-                gradient: ideArtColor1,
+      body: ListView (
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: GradientText(
+                  'Explore Challenges',
+                  style: TextStyle(
+                    fontSize: 24, 
+                    fontFamily: 'Poppins', 
+                    fontWeight: FontWeight.bold
+                    ),
+                  gradient: ideArtColor1,
+                ),
               ),
-            ),
-            
-            // Challenges
-              Container(
-                height: 200,
-                width: double.infinity,
-                child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal:8.0),
-                  shrinkWrap: true,
-                  physics: const ClampingScrollPhysics(),
-                  itemCount: _challenges.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index){
-                  return ChallengeTile(
-                    child: _challenges[index],
-                  );
-                }),
-              ),
+              
+              // Challenges
+                Container(
+                  height: 200,
+                  width: double.infinity,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal:8.0),
+                    shrinkWrap: true,
+                    physics: const ClampingScrollPhysics(),
+                    itemCount: _challenges.length,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index){
+                    return ChallengeTile(
+                      child: _challenges[index],
+                    );
+                  }),
+                ),
 
-      
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: GradientText(
-                'Gallery',
-                style: TextStyle(
-                  fontSize: 24, 
-                  fontFamily: 'Poppins', 
-                  fontWeight: FontWeight.bold
-                  ),
-                gradient: ideArtColor1,
+          
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: GradientText(
+                  'Gallery',
+                  style: TextStyle(
+                    fontSize: 24, 
+                    fontFamily: 'Poppins', 
+                    fontWeight: FontWeight.bold
+                    ),
+                  gradient: ideArtColor1,
+                ),
               ),
-            ),
-            
-            // UserPosts
-            Expanded(
-              child: ListView.builder(
+              
+              // UserPosts
+              ListView.builder(
                 shrinkWrap: true,
+                primary: false,
                 physics: const ClampingScrollPhysics(),
                 itemCount: _posts.length,
                 itemBuilder: (context, index){
@@ -88,10 +87,8 @@ class UserHome extends StatelessWidget {
                     child: _posts[index],
                     );
                 }),
-            ),
-          ],
-        ),
-      ), 
+            ],
+          ),
     );
   }
 }

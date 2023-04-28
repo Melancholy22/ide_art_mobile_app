@@ -42,9 +42,9 @@ class UserNotifs extends StatelessWidget {
     }
 
     Future<List<ArtIdea?>> queryListItems() async {
-      // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      //       content: Text("Sending Message"),
-      // ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Querying list of items"),
+      ));
       try {
         final request = ModelQueries.list(
           ArtIdea.classType,
@@ -57,7 +57,7 @@ class UserNotifs extends StatelessWidget {
           safePrint('errors: ${response.errors}');
           return <ArtIdea?>[];
         }
-        // safePrint(items);
+        safePrint(items);
         return items;
       } on ApiException catch (e) {
         safePrint('Query failed: $e');

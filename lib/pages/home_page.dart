@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:ide_art_mobile_app/features/pages/UserCreate.dart';
 import 'package:ide_art_mobile_app/features/pages/UserHome.dart';
-import 'package:ide_art_mobile_app/features/pages/UserNotifis.dart';
+import 'package:ide_art_mobile_app/features/pages/UserIdeas.dart';
 import 'package:ide_art_mobile_app/features/pages/UserProfile.dart';
 import 'package:ide_art_mobile_app/features/pages/UserSearch.dart';
 
@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     UserHome(),
     UserSearch(),
     UserCreate(),
-    UserNotifs(),
+    UserIdeas(),
     UserProfile()
   ];
 

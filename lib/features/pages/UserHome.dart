@@ -1,58 +1,27 @@
-import 'package:amplify_api/model_queries.dart';
-import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:ide_art_mobile_app/models/ArtIdea.dart';
-import 'package:ide_art_mobile_app/models/UserPosts.dart';
+import 'package:ide_art_mobile_app/common/utils/colors.dart';
+import '../../components/gradient_text.dart';
+import '../../components/top_app_bar.dart';
 
 class UserHome extends StatelessWidget {
   const UserHome({super.key});
 
-  Future<void> signOutCurrentUser() async {
-  try {
-    await Amplify.Auth.signOut();
-  } on AuthException catch (e) {
-    print(e.message);
-  }
-  }
+
 
   @override
   Widget build(BuildContext context) {
     
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Color.fromRGBO(113, 203, 255, 100),
-        elevation: 0,
-        title:
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-            children: [
-          // ignore: prefer_const_constructors
-          Text(
-            'ideArt',
-            // ignore: prefer_const_constructors
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold),
-          ),
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  signOutCurrentUser();
-                }, 
-                icon: Icon(Icons.density_medium),
-              ) 
-            ],
-          )
-        ]),
-      ),
+      appBar: topBar(),
       body: Center(
-        child: ElevatedButton(
-          child: Text('Generate Idea'),
-          onPressed: () {
-            
-          },
+        child: GradientText(
+          "IdeArt",
+          style: const TextStyle(
+                            fontSize: 42, 
+                            fontFamily: 'Poppins', 
+                            fontWeight: FontWeight.bold
+                          ),
+          gradient: ideArtColor1,
         ),
       ),
     );

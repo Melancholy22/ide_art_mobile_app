@@ -1,26 +1,24 @@
+import 'dart:math';
 import 'package:amplify_api/model_mutations.dart';
 import 'package:amplify_api/model_queries.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/components/my_textfield.dart';
+import 'package:ide_art_mobile_app/components/top_app_bar.dart';
 import '../../models/ArtIdea.dart';
 import '../../models/FilterType.dart';
 
-class UserNotifs extends StatelessWidget {
-  const UserNotifs({super.key});
-  Future<void> signOutCurrentUser() async {
-    try {
-      await Amplify.Auth.signOut();
-    } on AuthException catch (e) {
-      print(e.message);
-    }
-  }
+class UserIdeas extends StatelessWidget {
+  const UserIdeas({super.key});
 
   @override
   Widget build(BuildContext context) {
     FilterType artIdeaType = FilterType.PEOPLE;
     final ideaController = TextEditingController();
+    var people = [], places = [], objects = [], ideas = [], animals = [];
+    var adverbs = [" aggressively", " casually", " quickly", " hastily", " slowly", " cautiously", " hesitantly", " clumsily", " carefully", " creepily"];
+    var verbs = [" eating in ", " swimming in ", " sitting in ", " taking a stroll in ", " wandering around ", " crying in ", " laughing in ", " smiling in ", " frowning in ", " relaxing in ", " frolicking in ", " admiring a picture of ", " tiptoeing around ", " sneaking around "];
+    var connectors = [" in the presence of ", " with ", " surrounded by ", " while staring at ", " accompanied by ", " joined by ", " while holding ", " while writing a poem about ", " while singing a song about ", " while publishing a paper on ", " while presenting a speech on "];
 
     Future<void> createArtIdea() async {
       try {
@@ -41,10 +39,8 @@ class UserNotifs extends StatelessWidget {
       }
     }
 
-    Future<List<ArtIdea?>> queryListItems() async {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Querying list of items"),
-      ));
+    Future<List<ArtIdea?>> queryListItems(int i) async {
+
       try {
         final request = ModelQueries.list(
           ArtIdea.classType,
@@ -58,6 +54,12 @@ class UserNotifs extends StatelessWidget {
           return <ArtIdea?>[];
         }
         safePrint(items);
+        var intValue = Random().nextInt(items.length);
+        if(i > 0)
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(items[intValue]!.idea),
+          ));
+
         return items;
       } on ApiException catch (e) {
         safePrint('Query failed: $e');
@@ -68,7 +70,7 @@ class UserNotifs extends StatelessWidget {
     Future<void> check() async{
       // safePrint("Value: " + _DropdownButtonExampleState.dropdownValue);
       switch(_DropdownButtonExampleState.dropdownValue){
-        case "Person" : { artIdeaType = FilterType.PEOPLE;  }
+        case "People" : { artIdeaType = FilterType.PEOPLE;  }
         break;
 
         case "Places" : { artIdeaType = FilterType.PLACES;  }
@@ -89,35 +91,41 @@ class UserNotifs extends StatelessWidget {
       safePrint(artIdeaType);
     }
 
+    Future<void> generateScenario () async {
+      var rng = Random();
+      artIdeaType = FilterType.PEOPLE;
+      people = await queryListItems(0);
+      artIdeaType = FilterType.PLACES;
+      places = await queryListItems(0);
+      artIdeaType = FilterType.OBJECTS;
+      objects = await queryListItems(0);
+      artIdeaType = FilterType.ANIMALS;
+      animals = await queryListItems(0);
+      artIdeaType = FilterType.IDEAS;
+      ideas = await queryListItems(0);
+
+      int scenarioType = rng.nextInt(4);
+      String scenes = "";
+      switch(scenarioType) {
+        case 0:
+          scenes = people[rng.nextInt(people.length)]!.idea + verbs[rng.nextInt(verbs.length)] + places[rng.nextInt(places.length)]!.idea;
+          break;
+        case 1:
+          scenes = people[rng.nextInt(people.length)]!.idea + adverbs[rng.nextInt(adverbs.length)] + verbs[rng.nextInt(verbs.length)] + places[rng.nextInt(places.length)]!.idea + connectors[rng.nextInt(connectors.length)] + objects[rng.nextInt(objects.length)]!.idea.toLowerCase();
+          break;
+        case 2:
+          scenes = people[rng.nextInt(people.length)]!.idea + adverbs[rng.nextInt(adverbs.length)]  + verbs[rng.nextInt(verbs.length)] + places[rng.nextInt(places.length)]!.idea;
+          break;
+        case 3:
+          scenes = people[rng.nextInt(people.length)]!.idea + verbs[rng.nextInt(verbs.length)] + places[rng.nextInt(places.length)]!.idea + connectors[rng.nextInt(connectors.length)] + objects[rng.nextInt(objects.length)]!.idea.toLowerCase();
+          break;
+        default: 
+      }
+      safePrint(scenes);
+    }
+
     return Scaffold(
-      appBar: AppBar(
-        //backgroundColor: Color.fromRGBO(113, 203, 255, 100),
-        elevation: 0,
-        title:
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-            children: [
-          // ignore: prefer_const_constructors
-          Text(
-            'ideArt',
-            // ignore: prefer_const_constructors
-            style: TextStyle(
-                color: Colors.white,
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold),
-          ),
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  signOutCurrentUser();
-                }, 
-                icon: Icon(Icons.density_medium),
-              ) 
-            ],
-          )
-        ]),
-      ),
+      appBar: topBar(),
       body: Center(
         child: 
           Column(
@@ -137,7 +145,13 @@ class UserNotifs extends StatelessWidget {
               ElevatedButton(
                 child: Text('Generate Idea'),
                 onPressed: () {
-                  check().whenComplete(() => queryListItems());
+                  check().whenComplete(() => queryListItems(1));
+                },
+              ),
+              ElevatedButton(
+                child: Text('Generate Scenario'),
+                onPressed: () {
+                  generateScenario();
                 },
               ),
             ],

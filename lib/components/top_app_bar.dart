@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../components/gradient_text.dart';
+import 'package:ide_art_mobile_app/common/utils/colors.dart';
+
 
 class topBar extends StatelessWidget implements PreferredSizeWidget{
   const topBar({super.key});
@@ -22,20 +25,22 @@ class topBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //backgroundColor: Color.fromRGBO(113, 203, 255, 100),
+        backgroundColor: Color.fromRGBO(255, 255, 255, 0),
         elevation: 0,
         title:
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween, 
             children: [
           // ignore: prefer_const_constructors
-          Text(
+          GradientText(
             'ideArt',
             // ignore: prefer_const_constructors
             style: TextStyle(
-                color: Colors.white,
+                color: Colors.black,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold),
+          gradient: ideArtColor1,
+
           ),
           Row(
             children: [
@@ -43,7 +48,7 @@ class topBar extends StatelessWidget implements PreferredSizeWidget{
                 onPressed: () {
                   signOutCurrentUser();
                 }, 
-                icon: Icon(Icons.logout),
+                icon: const Icon(Icons.logout, color: Colors.black),
               ) 
             ],
           )

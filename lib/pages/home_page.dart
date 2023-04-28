@@ -5,6 +5,8 @@ import 'package:ide_art_mobile_app/features/pages/UserHome.dart';
 import 'package:ide_art_mobile_app/features/pages/UserIdeas.dart';
 import 'package:ide_art_mobile_app/features/pages/UserProfile.dart';
 import 'package:ide_art_mobile_app/features/pages/UserSearch.dart';
+import 'package:ide_art_mobile_app/common/utils/colors.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,9 +25,8 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _children = [
     UserHome(),
-    UserSearch(),
-    UserCreate(),
     UserIdeas(),
+    UserCreate(),
     UserProfile()
   ];
 
@@ -34,29 +35,31 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: _children[_selectedIndex],
       bottomNavigationBar: Container(
-        color: Colors.blue,
+            decoration: const BoxDecoration(
+              border: Border(
+                top: BorderSide(color: Colors.black12),
+              ),
+            ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-          child: GNav(
-              gap: 0,
-              iconSize: 24,
-              backgroundColor: Colors.blue,
-              color: Colors.white,
-              activeColor: Colors.white,
-              tabBackgroundColor: Color.fromARGB(255, 67, 170, 255),
-              padding: EdgeInsets.all(16),
-              onTabChange: (index) {
-                _navigateBottomNavBar(index);
-              },
-              tabs: [
-                GButton(icon: Icons.home, text: 'Home'),
-                GButton(icon: Icons.search, text: 'Search'),
-                GButton(icon: Icons.mode, text: 'Create'),
-                GButton(icon: Icons.circle_notifications, text: 'Notifs'),
-                GButton(icon: Icons.person, text: 'Me'),
-              ]),
+            child: GNav(
+                gap: 0,
+                iconSize: 24,
+                color: Colors.black,
+                activeColor: Colors.white,
+                tabBackgroundGradient: ideArtColor1,
+                padding: EdgeInsets.all(16),
+                onTabChange: (index) {
+                  _navigateBottomNavBar(index);
+                },
+                tabs: [
+                  GButton(icon: Icons.home, text: ' Home'),
+                  GButton(icon: Icons.lightbulb, text: ' Ideas'),
+                  GButton(icon: Icons.mode, text: ' Create'),
+                  GButton(icon: Icons.person, text: ' Me'),
+                ]),
+          ),
         ),
-      ),
     );
   }
 }

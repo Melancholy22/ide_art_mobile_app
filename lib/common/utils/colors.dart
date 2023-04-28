@@ -22,7 +22,7 @@ const Gradient ideArtColor1 = LinearGradient(
       Color.fromRGBO(244, 11, 248, 0.70),
     ],
     begin: Alignment.topRight,
-    stops: [.4, .5, .7, .8],
+    stops: [.4, .5, .8, .99],
     end: Alignment(1, 1),
 
 );

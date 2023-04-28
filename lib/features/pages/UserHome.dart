@@ -64,7 +64,7 @@ class UserHome extends StatelessWidget {
 
           
               const Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: EdgeInsets.only(top:16.0, left:16.0, right:16.0),
                 child: GradientText(
                   'Gallery',
                   style: TextStyle(
@@ -78,6 +78,7 @@ class UserHome extends StatelessWidget {
               
               // UserPosts
               ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 shrinkWrap: true,
                 primary: false,
                 physics: const ClampingScrollPhysics(),

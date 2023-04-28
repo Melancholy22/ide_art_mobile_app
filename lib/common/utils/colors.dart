@@ -16,13 +16,13 @@ const MaterialColor primaryColor = MaterialColor(0xFFFFCF44, primarySwatch);
 const int primaryColorDark = 0xFFFD9725;
 const Gradient ideArtColor1 = LinearGradient(
     colors: [
-      Color.fromRGBO(26, 131, 255, 96),
-      Color.fromRGBO(98, 122, 255, 90),
-      Color.fromRGBO(138, 80, 255, 85),
-      Color.fromRGBO(250, 28, 255, 80),
+      Color.fromRGBO(7, 96, 251, 0.85),
+      Color.fromRGBO(50, 81, 253, 0.80),
+      Color.fromRGBO(115, 45, 255, 0.75),
+      Color.fromRGBO(244, 11, 248, 0.70),
     ],
     begin: Alignment.topRight,
-    stops: [0.1, 0.2,0.3, 0.4],
+    stops: [.4, .5, .7, .8],
     end: Alignment(1, 1),
 
 );

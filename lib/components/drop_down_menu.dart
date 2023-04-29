@@ -35,7 +35,7 @@ class _DropdownButton1State extends State<DropdownButton1> {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
+      icon: const Icon(Icons.expand_more),
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
       underline: Container(

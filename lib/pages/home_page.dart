@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
 
   final List<Widget> _children = [
     UserHome(),
+    UserSearch(),
     UserIdeas(),
     UserCreate(),
     UserProfile()
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 tabs: [
                   GButton(icon: Icons.home, text: ' Home'),
+                  GButton(icon: Icons.search, text: ' Search'),
                   GButton(icon: Icons.lightbulb, text: ' Ideas'),
                   GButton(icon: Icons.mode, text: ' Create'),
                   GButton(icon: Icons.person, text: ' Me'),

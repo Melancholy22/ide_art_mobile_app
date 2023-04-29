@@ -8,6 +8,9 @@ import 'package:ide_art_mobile_app/components/my_textfield.dart';
 import 'package:ide_art_mobile_app/components/top_app_bar.dart';
 import '../../models/ArtIdea.dart';
 import '../../models/FilterType.dart';
+import 'package:ide_art_mobile_app/common/utils/colors.dart';
+import '../../components/gradient_text.dart';
+
 
 class UserIdeas extends StatelessWidget {
   const UserIdeas({super.key});
@@ -146,36 +149,84 @@ class UserIdeas extends StatelessWidget {
         child: 
           Column(
             children: [
-              drop1,
-              ElevatedButton(
-                child: Text('Generate Idea'),
-                onPressed: () {
-                  String str= drop1.getDrop(); 
-                  if(str != "Scenarios")
-                    check(str).whenComplete(() => queryListItems(1)).whenComplete(() => displayStuff());
-                  else
-                    generateScenario().whenComplete(() => displayStuff());
-                },
+              const Padding(
+                padding: EdgeInsets.all(16.0),
+                child: GradientText(
+                  'Topic Generation',
+                  style: TextStyle(
+                    fontSize: 24, 
+                    fontFamily: 'Poppins', 
+                    fontWeight: FontWeight.bold
+                    ),
+                  gradient: ideArtColor1,
+                ),
               ),
-              // ElevatedButton(
-              //   child: Text('Generate Scenario'),
-              //   onPressed: () {
-              //     generateScenario();
-              //   },
-              // ),
-              DropdownButtonExample(),
-              MyTextField(
-                controller: ideaController, 
-                hintText: 'Enter an idea', 
-                obscureText: false,
-              ),
-              ElevatedButton(
-                child: Text('Upload Idea'),
-                onPressed: () {
-                  check(_DropdownButtonExampleState.dropdownValue).whenComplete(() => createArtIdea());
-                },
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  drop1,
+                  Padding(
+                    padding: const EdgeInsets.only(left:8.0),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black, // Background color
+                      ),
+                      child: Text('Generate Idea'),
+                      onPressed: () {
+                        String str= drop1.getDrop(); 
+                        if(str != "Scenarios")
+                          check(str).whenComplete(() => queryListItems(1)).whenComplete(() => displayStuff());
+                        else
+                          generateScenario().whenComplete(() => displayStuff());
+                        },
+                      ),
+                  ),
+                
+                ],
               ),
 
+              const Padding(
+                padding: EdgeInsets.only(top:32.0, bottom: 16.0),
+                child: GradientText(
+                  'Suggest Topics',
+                  style: TextStyle(
+                    fontSize: 24, 
+                    fontFamily: 'Poppins', 
+                    fontWeight: FontWeight.bold
+                    ),
+                  gradient: ideArtColor1,
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: MyTextField(
+                  controller: ideaController, 
+                  hintText: 'Enter an idea', 
+                  obscureText: false,
+                ),
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  DropdownButtonExample(),
+                  Padding(
+                    padding: const EdgeInsets.only(left:8.0),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black, // Background color
+                      ),
+                      child: Text('Upload Idea'),
+                      onPressed: () {
+                        check(_DropdownButtonExampleState.dropdownValue).whenComplete(() => createArtIdea());
+                      },
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
       ),
@@ -198,7 +249,7 @@ class _DropdownButtonExampleState extends State<DropdownButtonExample> {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       value: dropdownValue,
-      icon: const Icon(Icons.arrow_downward),
+      icon: const Icon(Icons.expand_more),
       elevation: 16,
       style: const TextStyle(color: Colors.deepPurple),
       underline: Container(

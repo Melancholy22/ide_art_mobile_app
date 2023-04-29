@@ -1,1 +1,0 @@
-This is the repository layer that abstracts away the networking code, specificially services

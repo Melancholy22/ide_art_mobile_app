@@ -3,6 +3,7 @@ import 'package:amplify_api/model_mutations.dart';
 import 'package:amplify_api/model_queries.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:ide_art_mobile_app/components/drop_down_menu.dart';
 import 'package:ide_art_mobile_app/components/my_textfield.dart';
 import 'package:ide_art_mobile_app/components/top_app_bar.dart';
 import '../../models/ArtIdea.dart';
@@ -19,6 +20,8 @@ class UserIdeas extends StatelessWidget {
     var adverbs = [" aggressively", " casually", " quickly", " hastily", " slowly", " cautiously", " hesitantly", " clumsily", " carefully", " creepily"];
     var verbs = [" eating in ", " swimming in ", " sitting in ", " taking a stroll in ", " wandering around ", " crying in ", " laughing in ", " smiling in ", " frowning in ", " relaxing in ", " frolicking in ", " admiring a picture of ", " tiptoeing around ", " sneaking around "];
     var connectors = [" in the presence of ", " with ", " surrounded by ", " while staring at ", " accompanied by ", " joined by ", " while holding ", " while writing a poem about ", " while singing a song about ", " while publishing a paper on ", " while presenting a speech on "];
+    DropdownButton1 drop1 = DropdownButton1(list: ["People", "Places", "Objects", "Ideas", "Animals", "Scenarios"]);
+    String dis  = "";
 
     Future<void> createArtIdea() async {
       try {
@@ -53,12 +56,13 @@ class UserIdeas extends StatelessWidget {
           safePrint('errors: ${response.errors}');
           return <ArtIdea?>[];
         }
-        safePrint(items);
+        // safePrint(items);
         var intValue = Random().nextInt(items.length);
         if(i > 0)
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(items[intValue]!.idea),
-          ));
+          // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          //   content: Text(items[intValue]!.idea),
+          // ));
+          dis = items[intValue]!.idea;
 
         return items;
       } on ApiException catch (e) {
@@ -67,9 +71,9 @@ class UserIdeas extends StatelessWidget {
       return <ArtIdea?>[];
     }
 
-    Future<void> check() async{
+    Future<void> check(String string) async{
       // safePrint("Value: " + _DropdownButtonExampleState.dropdownValue);
-      switch(_DropdownButtonExampleState.dropdownValue){
+      switch(string){
         case "People" : { artIdeaType = FilterType.PEOPLE;  }
         break;
 
@@ -122,6 +126,18 @@ class UserIdeas extends StatelessWidget {
         default: 
       }
       safePrint(scenes);
+      dis = scenes;
+    }
+
+    void displayStuff() {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Text(dis),
+          );
+        },
+      );
     }
 
     return Scaffold(
@@ -130,6 +146,23 @@ class UserIdeas extends StatelessWidget {
         child: 
           Column(
             children: [
+              drop1,
+              ElevatedButton(
+                child: Text('Generate Idea'),
+                onPressed: () {
+                  String str= drop1.getDrop(); 
+                  if(str != "Scenarios")
+                    check(str).whenComplete(() => queryListItems(1)).whenComplete(() => displayStuff());
+                  else
+                    generateScenario().whenComplete(() => displayStuff());
+                },
+              ),
+              // ElevatedButton(
+              //   child: Text('Generate Scenario'),
+              //   onPressed: () {
+              //     generateScenario();
+              //   },
+              // ),
               DropdownButtonExample(),
               MyTextField(
                 controller: ideaController, 
@@ -139,21 +172,10 @@ class UserIdeas extends StatelessWidget {
               ElevatedButton(
                 child: Text('Upload Idea'),
                 onPressed: () {
-                  check().whenComplete(() => createArtIdea());
+                  check(_DropdownButtonExampleState.dropdownValue).whenComplete(() => createArtIdea());
                 },
               ),
-              ElevatedButton(
-                child: Text('Generate Idea'),
-                onPressed: () {
-                  check().whenComplete(() => queryListItems(1));
-                },
-              ),
-              ElevatedButton(
-                child: Text('Generate Scenario'),
-                onPressed: () {
-                  generateScenario();
-                },
-              ),
+
             ],
           ),
       ),

@@ -26,3 +26,10 @@ const Gradient ideArtColor1 = LinearGradient(
     end: Alignment(1, 1),
 
 );
+
+const List<Color> ideArtColors = [
+  Color.fromRGBO(7, 96, 251, 0.85),
+  Color.fromRGBO(50, 81, 253, 0.80),
+  Color.fromRGBO(115, 45, 255, 0.75),
+  Color.fromRGBO(244, 11, 248, 0.70),
+];

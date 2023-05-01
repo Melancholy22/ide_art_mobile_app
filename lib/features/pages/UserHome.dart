@@ -1,5 +1,7 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/common/utils/colors.dart';
+import 'package:ide_art_mobile_app/common/utils/styles.dart';
 import '../../components/gradient_text.dart';
 import '../../components/top_app_bar.dart';
 import 'package:ide_art_mobile_app/components/UserPost.dart';
@@ -32,16 +34,16 @@ class UserHome extends StatelessWidget {
 
       body: ListView (
             children: [
-              const Padding(
+              Padding(
                 padding: EdgeInsets.all(16.0),
-                child: GradientText(
-                  'Explore Challenges',
-                  style: TextStyle(
-                    fontSize: 24, 
-                    fontFamily: 'Poppins', 
-                    fontWeight: FontWeight.bold
+                child: AnimatedTextKit(
+                  animatedTexts: [
+                    ColorizeAnimatedText("Explore Challenges",
+                      textStyle: titleStyle,
+                      colors: ideArtColors,
                     ),
-                  gradient: ideArtColor1,
+                  ],
+                  isRepeatingAnimation: true,
                 ),
               ),
               

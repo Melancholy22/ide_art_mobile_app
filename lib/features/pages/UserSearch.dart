@@ -2,7 +2,10 @@ import 'package:amplify_api/model_queries.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/components/UserPostTile.dart';
+import 'package:lottie/lottie.dart';
 
+import '../../common/utils/colors.dart';
+import '../../components/gradient_text.dart';
 import '../../models/UserPosts.dart';
 
 class UserSearch extends StatefulWidget {
@@ -44,6 +47,7 @@ class _UserSearchState extends State<UserSearch>{
     {
       listPosts.add(UserPostBox(post: items[i]!));
     }
+    await Future.delayed(Duration(seconds: 3));
     return listPosts;
   }
 
@@ -57,14 +61,40 @@ class _UserSearchState extends State<UserSearch>{
           List<Widget> children;
           if (snapshot.hasData) {
             children = <Widget>[
-              const Icon(
-                Icons.check_circle_outline,
-                color: Colors.green,
-                size: 60,
+              SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    // Add padding around the search bar
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    // Use a Material design search bar
+                    child: TextField(
+                      controller: _searchController,
+                      decoration: InputDecoration(
+                        hintText: 'Search...',
+                        // Add a clear button to the search bar
+                        suffixIcon: IconButton(
+                          icon: Icon(Icons.clear),
+                          onPressed: () => _searchController.clear(),
+                        ),
+                        // Add a search icon or button to the search bar
+                        prefixIcon: IconButton(
+                          icon: Icon(Icons.search),
+                          onPressed: () {
+                            // Perform the search here
+                          },
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-          Expanded(
-            child: GridView.count(crossAxisCount: 3, children: listPosts,),
-          ),
+              Expanded(
+                child: GridView.count(crossAxisCount: 3, children: listPosts,),
+              ),
             ];
           } else if (snapshot.hasError) {
             children = <Widget>[
@@ -79,15 +109,16 @@ class _UserSearchState extends State<UserSearch>{
               ),
             ];
           } else {
-            children = const <Widget>[
-              SizedBox(
-                width: 60,
-                height: 60,
-                child: CircularProgressIndicator(),
-              ),
-              Padding(
-                padding: EdgeInsets.only(top: 16),
-                child: Text('Awaiting result...'),
+            children = <Widget>[
+              Lottie.asset("assets/animations/53152-loading-dots.json"),
+              const GradientText(
+                'Loading Results',
+                style: TextStyle(
+                  fontSize: 36, 
+                  fontFamily: 'Poppins', 
+                  fontWeight: FontWeight.bold
+                  ),
+                gradient: ideArtColor1,
               ),
             ];
           }
@@ -102,37 +133,7 @@ class _UserSearchState extends State<UserSearch>{
     // return Scaffold(
     //   body: Column(
     //     children: [
-    //       SafeArea(
-    //         child: Padding(
-    //           padding: const EdgeInsets.all(8.0),
-    //           child: Container(
-    //             // Add padding around the search bar
-    //             padding: const EdgeInsets.symmetric(horizontal: 8.0),
-    //             // Use a Material design search bar
-    //             child: TextField(
-    //               controller: _searchController,
-    //               decoration: InputDecoration(
-    //                 hintText: 'Search...',
-    //                 // Add a clear button to the search bar
-    //                 suffixIcon: IconButton(
-    //                   icon: Icon(Icons.clear),
-    //                   onPressed: () => _searchController.clear(),
-    //                 ),
-    //                 // Add a search icon or button to the search bar
-    //                 prefixIcon: IconButton(
-    //                   icon: Icon(Icons.search),
-    //                   onPressed: () {
-    //                     // Perform the search here
-    //                   },
-    //                 ),
-    //                 border: OutlineInputBorder(
-    //                   borderRadius: BorderRadius.circular(20.0),
-    //                 ),
-    //               ),
-    //             ),
-    //           ),
-    //         ),
-    //       ),
+
     //       Expanded(
     //         child: GridView.count(
     //           crossAxisCount: 3,

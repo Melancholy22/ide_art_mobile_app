@@ -1,1 +1,0 @@
-This is where we will create the widgets and the pages the app will present to the UserPosts

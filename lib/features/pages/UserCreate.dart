@@ -170,60 +170,154 @@ class _UserCreateState extends State<UserCreate> {
       appBar: AppBar(
         title: Text('Upload Image'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // title
-            MyTextField(
-              controller: titleController, 
-              hintText: 'title', 
-              obscureText: false,
-            ),
-            const SizedBox(height: 10,),
-
-            // Description
-            MyTextField(
-              controller: descController, 
-              hintText: 'description', 
-              obscureText: false,
-            ),
-            const SizedBox(height: 10,),
-            //if image not null show the image
-            //if image null show text
-            image != null
-            ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.file(
-                  //to show image, you type like this.
-                  File(image!.path),
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: 300,
+      body: ListView(
+        children: [Center(
+          // Makes things go in middle of screen not object.
+          // Centering a row makes horizontal
+          child: Column(
+            // Col makes top of screen to bot in cetner, row simiar.
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              // title
+              /** 
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueAccent,
+                  borderRadius: BorderRadius.circular(32),
+                ),
+              )
+              */
+              new Container(
+                child: SizedBox(
+                  width: 500, 
+                  height: 60,
+                  child: TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter Title Name Here',
+                      labelText: "  Title",
+                      border: InputBorder.none,
+                      labelStyle: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black45,
+                      ),
+                    ),
+                    obscureText: false,
+                    maxLines: 1,
+                  ),
+                ),
+                height: 65,
+              ),
+              new Container(
+                // Description
+                child: SizedBox(
+                  width: 500,
+                  height: 60,
+                  child: TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter a short description',
+                      labelText: "  Description",
+                      border: InputBorder.none,
+                      labelStyle: TextStyle(
+                        fontSize: 25,
+                        color: Colors.black45,
+                      ),
+                    ),
+                    obscureText: false,
+                    maxLines: 1,
+                  ),
+                ),
+                height: 65,
+              ),
+              // Choose a pic
+              SizedBox(
+                child: TextField(
+                  controller: titleController,
+                  decoration: InputDecoration(
+                    labelText: "          Upload Image",
+                    labelStyle: TextStyle(
+                      fontSize: 30,
+                      color: Colors.black45,
+                    ),
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: false,
+                  maxLines: 400,
+                ),
+                height: 400,
+                width: 375,
+              ),
+              //if image not null show the image
+              //if image null show text
+              //
+              /** 
+              image != null
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.file(
+                          //to show image, you type like this.
+                          File(image!.path),
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
+                          height: 300,
+                        ),
+                      ),
+                    )
+                  : Text(
+                      "No Image",
+                      style: TextStyle(fontSize: 20),
+                    ),
+              // End Section here. GOAL: make upload image area that displays the image too.
+              ElevatedButton(
+                // Makes a button, on press contains a method.
+                onPressed: () {
+                  myAlert();
+                },
+                child: Text('Upload Photo'),
+              ),
+      
+              SizedBox(
+                height: 10,
+              ),
+              */
+              Container(
+                height: 80,
+                width: 400,
+                margin: EdgeInsets.only(top: 20),
+                decoration: BoxDecoration(
+                    gradient: const LinearGradient(
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
+                      colors: [
+                        Colors.purpleAccent,
+                        Colors.cyan,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Fill out whatever it does.
+                  },
+                  style: TextButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    backgroundColor: Colors.white.withOpacity(0.1),
+                    shadowColor: Colors.white.withOpacity(0.1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0)),
+                  ),
+                  child: const Text(
+                    "Create Post",
+                    style: TextStyle(fontSize: 22),
+                  ),
                 ),
               ),
-            )
-          : Text(
-              "No Image",
-              style: TextStyle(fontSize: 20),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                myAlert();
-              },
-              child: Text('Upload Photo'),
-            ),
-
-            SizedBox(
-              height: 10,
-            ),
-
-            MyButton(onTap: onTap)
-          ],
-          
+            ],
+          ),
         ),
+        ]
       ),
     );
   }

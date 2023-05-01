@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../models/UserPosts.dart';
+
 
 class UserPost extends StatelessWidget {
-  final String child;
+  final UserPosts child;
   final String lorem="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
 
   UserPost({required this.child});
@@ -20,6 +22,10 @@ class UserPost extends StatelessWidget {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(  
+                    image: const DecorationImage(
+                      image: AssetImage('assets/images/profilepic.png'),
+                      fit: BoxFit.cover,
+                    ),
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.black),
                   ),
@@ -28,18 +34,18 @@ class UserPost extends StatelessWidget {
                   padding: const EdgeInsets.only(left:8.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
-                        "Title", 
-                        style: TextStyle(
+                        child.title!, 
+                        style: const TextStyle(
                           fontSize: 16,
                           fontFamily: 'Poppins', 
                           fontWeight: FontWeight.w500
                           ),
                       ),
                       Text(
-                        "Username", 
-                        style: TextStyle(
+                        child.author!, 
+                        style: const TextStyle(
                           fontSize: 14,
                           fontFamily: 'Poppins', 
                           fontWeight: FontWeight.w400
@@ -56,54 +62,47 @@ class UserPost extends StatelessWidget {
             child: Container(
               height: 230,
               decoration: BoxDecoration(  
+                    image: DecorationImage(
+                      image: NetworkImage(
+                      child.image!),
+                      fit: BoxFit.cover,
+                    ),
                     shape: BoxShape.rectangle,
                     border: Border.all(color: Colors.black),
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                   ),
-              child: Center(
-                child: Text(
-                  child, 
-                  style: const TextStyle(fontSize: 40),
-                  ),
-              ) 
             ),
           ),
-          Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal:16.0),
-                child: Container(
-                  height: 90,
-                  child: Center(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          lorem, 
-                          style: const TextStyle(
-                            fontSize: 12,
-                            fontFamily: 'Poppins', 
-                            fontWeight: FontWeight.normal
-                            ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical:8.0),
-                          child: Text(
-                            "1 minute ago", 
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.black54,
-                              fontFamily: 'Poppins', 
-                              fontWeight: FontWeight.normal
-                              ),
-                          ),
-                        ),
-                      ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal:16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  child.description!, 
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontFamily: 'Poppins', 
+                    fontWeight: FontWeight.normal
                     ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(vertical:8.0),
+                  child: Text(
+                    "1 minute ago", 
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                      fontFamily: 'Poppins', 
+                      fontWeight: FontWeight.normal
+                      ),
                   ),
                 ),
-              )
-            ],
+              ],
+            ),
           )
         ],
       ),

@@ -7,14 +7,14 @@ import '../../components/top_app_bar.dart';
 import 'package:ide_art_mobile_app/components/UserPost.dart';
 import 'package:ide_art_mobile_app/components/ChallengeTile.dart';
 import 'challengemodel.dart';
+import '../../models/UserPosts.dart';
+
 
 class UserHome extends StatelessWidget {
 
-  final List _posts = [
-    'Post 1',
-    'Post 2',
-    'Post 3',
-    'Post 4',
+  final List<UserPosts> _posts = [
+    UserPosts(id:"f68e5ed3-9ee1-4427-ac51-e89ddd567a01", author: "robjb822", title: "THE Billy", description:"THE BRONCO", image:"https://react-art-website-image-storage231705-staging.s3.us-west-1.amazonaws.com/public/images/fbcc9b5b-7734-4bec-a5e2-5a39eb015396BillyBronco.jpg"),
+    UserPosts(id:"2e91a1dc-a8d7-4696-8b47-84c365086d2a", author: "Meloncholy", title: "PIcture", description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ", image:"https://static.wikia.nocookie.net/konosuba/images/4/4d/Prev_Chomusuke.png/revision/latest?cb=20161216071437"),
   ];
 
   final List<Challenge> _challenges = [
@@ -68,7 +68,7 @@ class UserHome extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(top:16.0, left:16.0, right:16.0),
                 child: GradientText(
-                  'Gallery',
+                  'Recent Posts',
                   style: TextStyle(
                     fontSize: 24, 
                     fontFamily: 'Poppins', 

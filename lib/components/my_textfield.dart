@@ -25,12 +25,13 @@ class MyTextField extends StatelessWidget {
               borderSide: const BorderSide(color: Colors.black),
             ),
             focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15.0),
               borderSide: BorderSide(color: Colors.grey.shade400),
             ),
             fillColor: Colors.white,
             filled: true,
             hintText: hintText,
-            hintStyle: TextStyle(color: Colors.black)),
+            hintStyle: TextStyle(color: Colors.grey.shade400)),
       ),
     );
   }

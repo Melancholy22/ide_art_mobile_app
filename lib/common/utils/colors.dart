@@ -15,16 +15,15 @@ const Map<int, Color> primarySwatch = {
 const MaterialColor primaryColor = MaterialColor(0xFFFFCF44, primarySwatch);
 const int primaryColorDark = 0xFFFD9725;
 const Gradient ideArtColor1 = LinearGradient(
-    colors: [
-      Color.fromRGBO(7, 96, 251, 0.85),
-      Color.fromRGBO(50, 81, 253, 0.80),
-      Color.fromRGBO(115, 45, 255, 0.75),
-      Color.fromRGBO(244, 11, 248, 0.70),
-    ],
-    begin: Alignment.topRight,
-    stops: [.4, .5, .8, .99],
-    end: Alignment(1, 1),
-
+  colors: [
+    Color.fromRGBO(7, 96, 251, 0.85),
+    Color.fromRGBO(50, 81, 253, 0.80),
+    Color.fromRGBO(115, 45, 255, 0.75),
+    Color.fromRGBO(244, 11, 248, 0.70),
+  ],
+  begin: Alignment.topRight,
+  stops: [.4, .5, .8, .99],
+  end: Alignment(1, 1),
 );
 
 const List<Color> ideArtColors = [

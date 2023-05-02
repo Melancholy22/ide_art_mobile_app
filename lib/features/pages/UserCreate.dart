@@ -1,10 +1,14 @@
 import 'package:amplify_api/model_mutations.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:ide_art_mobile_app/common/utils/colors.dart';
+import 'package:ide_art_mobile_app/common/utils/styles.dart';
 import 'package:ide_art_mobile_app/components/my_button.dart';
 import 'package:ide_art_mobile_app/components/my_textfield.dart';
 import 'package:amplify_flutter/amplify_flutter.dart';
 import 'package:ide_art_mobile_app/components/top_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:progress_state_button/progress_button.dart';
 import '../../models/ModelProvider.dart';
 import 'dart:io';
 
@@ -131,6 +135,11 @@ class _UserCreateState extends State<UserCreate> {
     var username;
 
     Future<void> createUserPosts() async {
+      if(url == "" || url == null){
+        safePrint("Cannot Create an empty post");
+        return;
+      }
+        
       try {
         final model = UserPosts(
         author: username,
@@ -165,6 +174,9 @@ class _UserCreateState extends State<UserCreate> {
 
     onTap() async {
       fetchCurrentUserAttributes().whenComplete(() => uploadImage().whenComplete(() => getDownloadUrl().whenComplete(() => createUserPosts())));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("Successfully Created Post!"),
+    ));
     }
 
     return Scaffold(
@@ -174,6 +186,20 @@ class _UserCreateState extends State<UserCreate> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // title
+            AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  "Create Post",
+                  textStyle: TextStyle(
+                      fontSize: 40, 
+                      fontFamily: 'Poppins', 
+                      fontWeight: FontWeight.bold
+                  ),
+                  colors: ideArtColors,
+                  speed: const Duration(milliseconds: 200),
+                ),
+              ]
+            ),
             MyTextField(
               controller: titleController, 
               hintText: 'title', 
@@ -222,11 +248,9 @@ class _UserCreateState extends State<UserCreate> {
               ),
             ),
 
-            SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10,),
 
-            MyButton(onTap: onTap)
+            MyButton(onTap: onTap),
           ],
 
         ),

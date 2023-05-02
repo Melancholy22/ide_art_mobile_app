@@ -613,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.2.4"
+  progress_state_button:
+    dependency: "direct main"
+    description:
+      name: progress_state_button
+      sha256: "8efbe7978995d3e20f3987022d4851d6615b25d227c17c3eb22f4dfc0c08811e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.4"
   riverpod:
     dependency: transitive
     description:
@@ -763,5 +771,5 @@ packages:
     source: hosted
     version: "1.0.0"
 sdks:
-  dart: ">=2.19.0 <3.0.0"
+  dart: ">=2.19.0 <4.0.0"
   flutter: ">=3.3.0"

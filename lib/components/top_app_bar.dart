@@ -38,6 +38,7 @@ class topBar extends StatelessWidget implements PreferredSizeWidget{
             style: TextStyle(
                 color: Colors.black,
                 fontFamily: 'Poppins',
+                fontSize: 30,
                 fontWeight: FontWeight.bold),
           gradient: ideArtColor1,
 

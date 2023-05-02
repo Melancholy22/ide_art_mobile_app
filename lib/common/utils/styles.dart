@@ -5,3 +5,9 @@ TextStyle titleStyle = TextStyle(
   fontFamily: 'Poppins', 
   fontWeight: FontWeight.bold
 );
+
+TextStyle textStyle = TextStyle(
+  fontSize: 18, 
+  fontFamily: 'Poppins', 
+  fontWeight: FontWeight.normal,
+);

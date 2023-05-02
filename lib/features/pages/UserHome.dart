@@ -4,6 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:ide_art_mobile_app/common/utils/colors.dart';
 import 'package:ide_art_mobile_app/common/utils/styles.dart';
+import 'package:intl/intl.dart';
 import '../../components/gradient_text.dart';
 import '../../components/top_app_bar.dart';
 import 'package:ide_art_mobile_app/components/UserPost.dart';
@@ -77,9 +78,6 @@ class _UserHomeState extends State<UserHome>{
     isLoading = true;
 
     firstPageData = await queryPaginatedData();
-    setState(() {
-      hasMore = firstPageData?.hasNextResult ?? false;
-    });
     if (hasMore == true){
       var items = firstPageData?.items;
       final List newItems = items!.whereType<UserPosts>().toList();
@@ -87,7 +85,7 @@ class _UserHomeState extends State<UserHome>{
         isLoading = false;
         _posts.addAll(newItems as Iterable<UserPosts>);
         safePrint("adding items");
-        safePrint(_posts);
+        safePrint(newItems);
       });
     }
   }
@@ -100,6 +98,9 @@ class _UserHomeState extends State<UserHome>{
           final secondPageData = secondResult.data;
       return secondPageData;
     } else {
+      setState(() {
+        hasMore = false;
+      });
       return firstPageData;
     }
   }
@@ -111,6 +112,14 @@ class _UserHomeState extends State<UserHome>{
       _posts.clear();
       initLoad();
     });
+  }
+
+  String formatDateTime(TemporalDateTime? t){
+    var dateTime = t?.getDateTimeInUtc() ;
+    DateTime datetime = dateTime!.toLocal();
+    var dateLocal = DateFormat.yMMMd().format(datetime).toString();
+
+    return dateLocal;
   }
 
 
@@ -183,6 +192,7 @@ class _UserHomeState extends State<UserHome>{
                     if(index < _posts.length){
                     return UserPost(
                       child: _posts[index],
+                      date: formatDateTime(_posts[index].createdAt),
                       );
                      }
                      else{

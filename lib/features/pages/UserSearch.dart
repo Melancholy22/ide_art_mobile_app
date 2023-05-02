@@ -115,10 +115,10 @@ class _UserSearchState extends State<UserSearch>{
             children = <Widget>[
               SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(top:32.0),
                   child: Container(
                     // Add padding around the search bar
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     // Use a Material design search bar
                     child: TextField(
                       controller: _searchController,

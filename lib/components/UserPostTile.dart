@@ -16,6 +16,7 @@ class UserPostBox extends StatelessWidget {
         );
       },
       child: Padding(
+        key: ValueKey(post.image!),
         padding: const EdgeInsets.all(8.0),
         child: Image.network(post.image ?? ""),
       ),
@@ -29,36 +30,68 @@ class ImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
+      shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
       child: Container(
+        decoration: BoxDecoration(  
+          shape: BoxShape.rectangle,
+          border: Border.all(color: Colors.black),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
+        ),
         width: 400,
-        height: 500,
+        height: 600,
         child: Column(
           children: [
-            Container(
-              alignment: Alignment.topCenter,
-              child: Image.network(post.image ?? "", fit: BoxFit.contain,),
-              height: 380,
-              width: 400,
+            Stack(
+              children:[ 
+              Container(
+                key: ValueKey(post.image!),
+                height: 300,
+                width: 400,
+                child: ClipRRect(borderRadius: const BorderRadius.only(topLeft:Radius.circular(20.0), topRight:Radius.circular(20.0)), child: Image.network(post.image ?? "", fit: BoxFit.cover,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: 40,
+                  decoration: const BoxDecoration(  
+                    shape: BoxShape.circle,
+                    color: Colors.black,
+                  ),
+              
+                  child: CloseButton(
+                    color: Colors.white,
+                    onPressed: () => Navigator.pop(context), 
+                  ),
+                ),
+              )
+              ]
             ),
-            Text(
-              post.title ?? "",
-              style: titleStyle,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children:[
+                    Text(
+                    post.title ?? "",
+                    style: titleStyle,
+                    ),
+                    Text(
+                    "by: ${post.author}",
+                    style: textStyle,
+                    ),
+                    Text(
+                      post.description ?? "" ,
+                      style: textStyle,
+                    ),
+                  ] 
+                ),
+              ),
             ),
-            Text(
-              "Created by: ${post.author}",
-              style: textStyle,
-            ),
-            Text(
-              "Description:",
-              style: textStyle,
-            ),
-            Text(
-              post.description ?? "",
-              style: textStyle,
-            ),
+            
           ],
         ),
       ),
     );
   }
+
 }

@@ -182,77 +182,79 @@ class _UserCreateState extends State<UserCreate> {
     return Scaffold(
       appBar: topBar(),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // title
-            AnimatedTextKit(
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  "Create Post",
-                  textStyle: TextStyle(
-                      fontSize: 40, 
-                      fontFamily: 'Poppins', 
-                      fontWeight: FontWeight.bold
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // title
+              AnimatedTextKit(
+                animatedTexts: [
+                  ColorizeAnimatedText(
+                    "Create Post",
+                    textStyle: TextStyle(
+                        fontSize: 40, 
+                        fontFamily: 'Poppins', 
+                        fontWeight: FontWeight.bold
+                    ),
+                    colors: ideArtColors,
+                    speed: const Duration(milliseconds: 200),
                   ),
-                  colors: ideArtColors,
-                  speed: const Duration(milliseconds: 200),
-                ),
-              ]
-            ),
-            MyTextField(
-              controller: titleController, 
-              hintText: 'title', 
-              obscureText: false,
-            ),
-            const SizedBox(height: 10,),
-
-            // Description
-            MyTextField(
-              controller: descController, 
-              hintText: 'description', 
-              obscureText: false,
-            ),
-            const SizedBox(height: 10,),
-            //if image not null show the image
-            //if image null show text
-            image != null
-            ? Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.file(
-                  //to show image, you type like this.
-                  File(image!.path),
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: 300,
-                ),
+                ]
               ),
-            )
-            : GestureDetector(
-              onTap: () {
-                myAlert();
-              },
-              child: Container(
-                height: 360,
-                width: 360,
-                child: Image(image: AssetImage("assets/images/default-placeholder.png"), fit: BoxFit.cover,),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: Colors.black,
-                    width: 1,
+              MyTextField(
+                controller: titleController, 
+                hintText: 'title', 
+                obscureText: false,
+              ),
+              const SizedBox(height: 10,),
+        
+              // Description
+              MyTextField(
+                controller: descController, 
+                hintText: 'description', 
+                obscureText: false,
+              ),
+              const SizedBox(height: 10,),
+              //if image not null show the image
+              //if image null show text
+              image != null
+              ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.file(
+                    //to show image, you type like this.
+                    File(image!.path),
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width,
+                    height: 300,
                   ),
                 ),
+              )
+              : GestureDetector(
+                onTap: () {
+                  myAlert();
+                },
+                child: Container(
+                  height: 360,
+                  width: 360,
+                  child: Image(image: AssetImage("assets/images/default-placeholder.png"), fit: BoxFit.cover,),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+                    ),
+                  ),
+                ),
               ),
-            ),
-
-            const SizedBox(height: 10,),
-
-            MyButton(onTap: onTap),
-          ],
-
+        
+              const SizedBox(height: 10,),
+        
+              MyButton(onTap: onTap),
+            ],
+        
+          ),
         ),
       ),
     );

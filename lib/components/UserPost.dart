@@ -4,9 +4,10 @@ import '../../models/UserPosts.dart';
 
 class UserPost extends StatelessWidget {
   final UserPosts child;
+  final String date;
   final String lorem="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ";
 
-  UserPost({required this.child});
+  UserPost({required this.child, required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -60,13 +61,19 @@ class UserPost extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Container(
+              key: ValueKey(child.image!),
               height: 230,
               decoration: BoxDecoration(  
-                    image: DecorationImage(
+                    image: child.image != null?
+                     DecorationImage(
                       image: NetworkImage(
                       child.image!),
                       fit: BoxFit.cover,
-                    ),
+                    )
+                    : const DecorationImage(
+                    image: NetworkImage(
+                        'urlImage'),
+                  ),
                     shape: BoxShape.rectangle,
                     border: Border.all(color: Colors.black),
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -89,11 +96,11 @@ class UserPost extends StatelessWidget {
                     fontWeight: FontWeight.normal
                     ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical:8.0),
+                 Padding(
+                  padding: const EdgeInsets.symmetric(vertical:8.0),
                   child: Text(
-                    "1 minute ago", 
-                    style: TextStyle(
+                    date, 
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Colors.black54,
                       fontFamily: 'Poppins', 

@@ -49,7 +49,7 @@ class _UserSearchState extends State<UserSearch>{
     setState(() {
       listPosts = newPosts;
     });
-    //await Future.delayed(Duration(seconds: 3));
+    //await Future.delayed(Duration(seconds: 2));
     count++;
     return listPosts;
   }

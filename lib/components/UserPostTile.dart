@@ -48,7 +48,15 @@ class ImageDialog extends StatelessWidget {
                 key: ValueKey(post.image!),
                 height: 300,
                 width: 400,
-                child: ClipRRect(borderRadius: const BorderRadius.only(topLeft:Radius.circular(20.0), topRight:Radius.circular(20.0)), child: Image.network(post.image ?? "", fit: BoxFit.cover,)),
+                child: ClipRRect(borderRadius: const BorderRadius.only(topLeft:Radius.circular(20.0), topRight:Radius.circular(20.0)), 
+                child: Image.network(
+                  post.image ?? "", 
+                  fit: BoxFit.cover, 
+                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return const Text('ð¢');
+                  },
+                )
+              ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

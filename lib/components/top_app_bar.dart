@@ -25,35 +25,42 @@ class topBar extends StatelessWidget implements PreferredSizeWidget{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 80,
         backgroundColor: Color.fromRGBO(255, 255, 255, 0),
         elevation: 0,
-        title:
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween, 
-            children: [
-          // ignore: prefer_const_constructors
-          GradientText(
-            'ideArt',
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, 
+          children: [
             // ignore: prefer_const_constructors
-            style: TextStyle(
-                color: Colors.black,
-                fontFamily: 'Poppins',
-                fontSize: 30,
-                fontWeight: FontWeight.bold),
-          gradient: ideArtColor1,
-
+            GradientText(
+              'ideArt',
+              // ignore: prefer_const_constructors
+              style: TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Poppins',
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+              gradient: ideArtColor1,
+            ),
+            Row(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    signOutCurrentUser();
+                  }, 
+                  icon: const Icon(Icons.logout, color: Colors.black),
+                ) 
+              ],
+            )
+          ],
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(4.0),
+          child: Container(
+              color: Colors.black12,
+              height: 1.0,
           ),
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  signOutCurrentUser();
-                }, 
-                icon: const Icon(Icons.logout, color: Colors.black),
-              ) 
-            ],
-          )
-        ]),
+        ),
       ),
     );
   }

@@ -21,7 +21,8 @@ class ChallengeTile extends StatelessWidget {
               decoration: BoxDecoration(  
                 image: DecorationImage(
                   image: NetworkImage(
-                  child.image),
+                  child.image,
+                  ),
                   fit: BoxFit.cover,
                 ),
                 shape: BoxShape.rectangle,
